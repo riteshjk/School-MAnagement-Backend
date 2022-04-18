@@ -3,7 +3,9 @@ const connect = require('./config/db');
 const app = express();
 const { register, login } = require("./Controllers/auth.controller");
 const { body, validationResult } = require("express-validator");
+require("dotenv").config();
 
+const port = process.env.PORT || 3000;
 
 // // const cors = require("cors")
 const teachercontroller = require("./Controllers/teacher.controller");
@@ -30,10 +32,10 @@ app.post(
 
 app.use("/teacher", teachercontroller);
 app.use("/class", classcontroller);
-app.listen(3000,async()=>{
+app.listen(port,async()=>{
     try{
         await connect();
-        console.log('Server started at port 3000');
+        console.log(`Server started at port ${port}`);
     }
     catch(err){
         console.log(err)
