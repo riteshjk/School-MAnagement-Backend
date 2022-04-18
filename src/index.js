@@ -3,6 +3,7 @@ const connect = require('./config/db');
 const app = express();
 const { register, login } = require("./Controllers/auth.controller");
 const { body, validationResult } = require("express-validator");
+const cors = require("cors");
 require("dotenv").config();
 
 const port = process.env.PORT || 3000;
@@ -12,6 +13,9 @@ const teachercontroller = require("./Controllers/teacher.controller");
 const classcontroller = require("./Controllers/class.controller");
 
 app.use(express.json());
+
+app.use(cors());
+
 app.post(
     "/register",
     body("name").notEmpty().withMessage("Please Provide Valid first name"),
